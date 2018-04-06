@@ -29,7 +29,19 @@ void intercambio(int *a, int * b)
     *a = *b;
     *b = temp;
 }
-
+void multipla_matrices(int a[][], int b[][], int c[][], int n)
+{
+    int i, j, k;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            c[i][j] = 0;
+            for (k = 0; k < N; k++)
+                c[i][j] += a[i][k]*b[k][j];
+        }
+    }
+}
 int len_lista(char c[]) {
     int i = 0;
     int total = 0;
@@ -121,5 +133,24 @@ int main()
     swap_char_p(str1,str2,4);
     cout<<str1<<endl;
     cout<<str2<<endl;
-	return 0;
+    int N = 4;
+    int a[N][N] = { {1, 1, 1, 1},
+                    {2, 2, 2, 2},
+                    {3, 3, 3, 3},
+                    {4, 4, 4, 4}};
+ 
+    int b[N][N] = { {1, 1, 1, 1},
+                    {2, 2, 2, 2},
+                    {3, 3, 3, 3},
+                    {4, 4, 4, 4}};
+ 
+    int c[N][N]; 
+    multiplica_matrices(a, b, c ,N);
+    for (int i = 0; i < N; i++) {
+	    for(int j = 0; j < N; j++) {
+		    cout<<c[i][j];
+	    }
+	    cout<<endl;
+    }
+    return 0;
 }
