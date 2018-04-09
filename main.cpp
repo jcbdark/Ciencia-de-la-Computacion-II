@@ -8,8 +8,10 @@ int sum_array(int arr[],int n) {
     return total;
 }
 int sum_array_r(int arr[], int n) {
-        return arr[n] + arr[n-1];
-        n--;
+   if(n == 0)
+ 	return 0;
+   else
+        return arr[n-1] + sum_array_r(arr,n-1);
 }
 void paso_valor(int a ,int b)
 {
@@ -106,6 +108,17 @@ void insertionsort(int arr[], int n)
        arr[j+1] = key;
    }
 }
+int convert_to_char_to_int(char *s)
+{
+    int n = 0;
+    while (*s >= '0' && *s <= '9')
+    {
+        n = 10 * n + (*s - '0');
+        s++;
+    }
+    return n;
+}
+
 int main()
 {
     int a = 3;
@@ -151,5 +164,7 @@ int main()
 	    }
 	    cout<<endl;
     }
+    char entero[] = {'1','2','3','4','\0'};
+    cout<<convert_to_char_to_int(entero)<<endl;
     return 0;
 }
