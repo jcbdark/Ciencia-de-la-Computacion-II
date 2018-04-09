@@ -118,7 +118,24 @@ int convert_to_char_to_int(char *s)
     }
     return n;
 }
-
+void concat1 (char *a,char b[])
+{
+    a+=strlen(a);
+    int lenb=strlen(b);
+    for(char i=0;i<=lenb;i++)
+    {
+        *(a++)=b[i];
+    }
+}
+void concat2(char *a,char *b)
+{
+    a+=strlen(a);
+    int lenb=strlen(b);
+    for(char i=0;i<=lenb;i++)
+    {
+        *(a++)=*(b++);
+    }
+}
 int main()
 {
     int a = 3;
