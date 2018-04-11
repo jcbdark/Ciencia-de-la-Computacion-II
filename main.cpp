@@ -1,18 +1,5 @@
 #include <iostream>
 using namespace std;
-int sum_array(int arr[],int n) {
-    int total = 0;
-    for(int i = 0; i < n; i++) {
-        total += arr[i];
-    }
-    return total;
-}
-int sum_array_r(int arr[], int n) {
-   if(n == 0)
- 	return 0;
-   else
-        return arr[n-1] + sum_array_r(arr,n-1);
-}
 void paso_valor(int a ,int b)
 {
     int temp = a;
@@ -31,6 +18,37 @@ void intercambio(int *a, int * b)
     *a = *b;
     *b = temp;
 }
+int sum_array(int arr[],int n) {
+    int total = 0;
+    for(int i = 0; i < n; i++) {
+        total += arr[i];
+    }
+    return total;
+}
+int sum_array_r(int arr[], int n) {
+   if(n == 0)
+ 	return 0;
+   else
+        return arr[n-1] + sum_array_r(arr,n-1);
+}
+
+void insertionsort(int arr[], int n)
+{
+   int  key, j;
+   for (int i = 1; i < n; i++)
+   {
+       key = arr[i];
+       j = i-1;
+
+       while (j >= 0 && arr[j] > key)
+       {
+           arr[j+1] = arr[j];
+           j = j-1;
+       }
+       arr[j+1] = key;
+   }
+}
+
 void multipla_matrices(int a[][], int b[][], int c[][], int n)
 {
     for (int i = 0; i < n; i++)
@@ -70,6 +88,20 @@ void copia_t(char *s, char *t) {
         t++;
     }
 }
+void concatenar(char a[], char b[])
+{
+    int i = 0,j= 0;
+    while (a[i] != '\0')
+        i++;
+    while ((a[i++] = b[j++]) != '\0');
+}
+void concatenar_ptr(char *a, char *b)
+{
+    while (*a != '\0') {
+        a++;
+    }
+    while((*a++ = *b++) != '\0');
+}
 void swap_char(char a[], char b[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -92,21 +124,18 @@ void swap_char_p(char *a ,char *b, int n)
         i++;
     }
 }
-void insertionsort(int arr[], int n)
-{
-   int  key, j;
-   for (int i = 1; i < n; i++)
-   {
-       key = arr[i];
-       j = i-1;
-
-       while (j >= 0 && arr[j] > key)
-       {
-           arr[j+1] = arr[j];
-           j = j-1;
-       }
-       arr[j+1] = key;
-   }
+bool es_palindromo(char *xs, int n){
+    int i=0;
+    int k= n;
+    int j=k-1;
+    while(i < k/2){
+        if(*(xs+i)!=*(xs+j)){
+            return false;
+        }
+        i++;
+        j--;
+    }
+    return true;
 }
 int convert_to_char_to_int(char *s)
 {
@@ -118,24 +147,7 @@ int convert_to_char_to_int(char *s)
     }
     return n;
 }
-void concat1 (char *a,char b[])
-{
-    a+=strlen(a);
-    int lenb=strlen(b);
-    for(char i=0;i<=lenb;i++)
-    {
-        *(a++)=b[i];
-    }
-}
-void concat2(char *a,char *b)
-{
-    a+=strlen(a);
-    int lenb=strlen(b);
-    for(char i=0;i<=lenb;i++)
-    {
-        *(a++)=*(b++);
-    }
-}
+
 int main()
 {
     int a = 3;
@@ -182,6 +194,13 @@ int main()
 	    cout<<endl;
     }
     char entero[] = {'1','2','3','4','\0'};
+    char s[]={'a','n','a','\0'};
+    cout<<es_palindromo(s,3)<<endl;
     cout<<convert_to_char_to_int(entero)<<endl;
+    concatenar(str1,str2);
+    cout<<str1<<endl;
+    char cadena3[]={'m','a','f','e','r','\0'};
+    concatenar_ptr(cadena,cadena3);
+    cout<<cadena;
     return 0;
 }
