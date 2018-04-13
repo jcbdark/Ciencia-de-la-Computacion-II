@@ -131,6 +131,8 @@ void quicksort(int arr[], int low, int high)
 void insertionsort(int arr[], int n)
 {
    int  key, j;
+   /* Mueve los elementos del arr[0..i-1], que son
+          mayores que la llave, una posicion adelante de su posicion actual */
    for (int i = 1; i < n; i++)
    {
        key = arr[i];
