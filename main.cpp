@@ -243,7 +243,30 @@ int convert_to_char_to_int(char *s)
     }
     return n;
 }
+double convert_to_char_to_double(char* x)
+{
+	double total=0, num;
+	int df=10,i=0;
+	bool decimal=false;
+	while(x[i])
+	{
+		num=x[i]-'0';
+		if(decimal)
+		{
+		num=num/df;
+		df=df*10;
+		}
+		else if (!decimal && ( x[i]>='0' && x[i]<='9'))
+		total=total*10;
 
+		if(x[i]=='.' )
+		decimal=true;
+		else total+=num;
+
+		i++;
+	}
+	return total;
+}
 int main()
 {
     int a = 3;
@@ -298,6 +321,8 @@ int main()
     char cadena3[]={'m','a','f','e','r','\0'};
     concatenar_ptr(cadena,cadena3);
     cout<<cadena;
+    char doble[]= {'3','.','1','5','\0'};
+    cout<<convert_to_char_to_double(doble)<<endl;
     int nums[] = {18,5,4,23,1,8,2};
     mergesort(nums,0,6);
     for (int i = 0; i < 7; i++)
@@ -309,6 +334,7 @@ int main()
     {
 	cout<<nums2[i]<<" ";
     }
-   cout<<endl;
+    cout<<endl;
+    
     return 0;
 }
