@@ -31,7 +31,103 @@ int sum_array_r(int arr[], int n) {
    else
         return arr[n-1] + sum_array_r(arr,n-1);
 }
+void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+ 
+    /* crear arrays tmeporales */
+    int L[n1], R[n2];
+ 
+    /* Copia de los datos a los arrays tmeporales L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+ 
+    /* mezclar los arrayas temporales y ponerlos dentro arr[l..r]*/
+    i = 0; // indice inicial del primer subarray 
+    j = 0; // indice inicial del segundo subarray
+    k = l; // indice inicial del subarray mezcla 
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    /* Copiar los elementos restantes de L[],si existe alguno */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+ 
+    /* Copiar los elementos de restantes de R[],si existe alguno */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+ 
+/* l es para el indice izquierdo y r es para el indice derecho odel subarray que sera ordenado*/
+void mergesort(int arr[], int l, int r)
+{
+    if (l < r)
+    {
+        // indice medio
+        int m = l+(r-l)/2;
+ 
+        // Ordenar
+        mergesort(arr, l, m);
+        mergesort(arr, m+1, r);
+ 
+        merge(arr, l, m, r);
+    }
+}
+int particion (int arr[], int low, int high)
+{
+    int pivot = arr[high];    // pivote
+    int i = (low - 1);  // indice del menor elemento
+ 
+    for (int j = low; j <= high- 1; j++)
+    {
+        // si el elemento actual es menor o igual al pivote
+        if (arr[j] <= pivot)
+        {
+            i++;    // incrementamos el indice del menor elemento
+            intercambio(&arr[i], &arr[j]);
+        }
+    }
+    intercambio(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+ 
 
+void quicksort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        /* pi es el indice de particionamiento */
+        int pi = particion(arr, low, high);
+ 
+        // Ordenar los elementos
+        quicksort(arr, low, pi - 1);
+        quicksort(arr, pi + 1, high);
+    }
+}
 void insertionsort(int arr[], int n)
 {
    int  key, j;
@@ -202,5 +298,17 @@ int main()
     char cadena3[]={'m','a','f','e','r','\0'};
     concatenar_ptr(cadena,cadena3);
     cout<<cadena;
+    int nums[] = {18,5,4,23,1,8,2};
+    mergesort(nums,0,6);
+    for (int i = 0; i < 7; i++)
+	cout<<nums[i]<<" ";
+    cout<<endl;
+    int nums2[] = {26,2,45,1,6,8};
+    quicksort(nums2,0,5);
+    for (int i = 0; i < 6; i++)
+    {
+	cout<<nums2[i]<<" ";
+    }
+   cout<<endl;
     return 0;
 }
